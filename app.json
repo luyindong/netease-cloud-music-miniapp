@@ -1,9 +1,10 @@
 {
   "pages": [
+    "page/video/video",
+
     "page/index/index",
     "page/personal/personal",
-    "page/login/login",
-    "page/video/video"
+    "page/login/login"
   ],
   "tabBar": {
     "color": "#333",

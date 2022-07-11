@@ -1,2 +1,24 @@
 <!--page/video/video.wxml-->
-<text>page/video/video.wxml</text>
+<view class="videoContainer">
+  <view class="header">
+    <image src="/static/images/video/video.jpg"></image>
+    <view class="search">搜索</view>
+    <image src="/static/images/logo.png"></image>
+  </view>
+
+  <!-- 导航区 -->
+  <scroll-view scroll-x enable-flex class="navScroll" scroll-into-view="{{'scroll'+navId}}" scroll-with-animation>
+    <view id="{{'scroll' +item.id}}" class="navItem" wx:for="{{videoGroupList}}" wx:key="id">
+      <view class="navContent {{navId === item.id ? 'active' :''}}" bindtap="changeNav" id="{{item.id}}">{{item.name}}</view>
+    </view>
+  </scroll-view>
+
+  <!-- 视频列表 -->
+  <scroll-view class="videoScroll" scroll-y scroll-x="false" enhanced show-scrollbar="false" refresher-enabled bindrefresherrefresh="bindRefresh" refresher-triggered="{{triggered}}">
+    <view class="videoItem" wx:for="{{videoList}}" wx:key="vid">
+      <video object-fit="contain" bindended="handlEnded" bindtimeupdate="handleTimeUpdate" autoplay="true" wx:if="{{videoId===item.data.vid}}" bindplay="handlePlay" poster="{{item.data.coverUrl}}" src="{{item.url}}" id="{{item.data.vid}}"></video>
+
+      <image wx:else="" bindtap="handlePlay" id="{{item.data.vid}}" src="{{item.data.coverUrl}}"></image>
+    </view>
+  </scroll-view>
+</view>
